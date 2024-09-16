@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GarisMaster: Pembelajaran Interaktif Jenis Garisan</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        h1, h2 {
+            color: #333;
+        }
+        #canvas {
+            border: 1px solid #ddd;
+            background: white;
+        }
+        button {
+            background: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            margin: 5px;
+            cursor: pointer;
+            border-radius: 3px;
+        }
+        button:hover {
+            background: #45a049;
+        }
+        #result {
+            margin-top: 20px;
+            font-weight: bold;
+        }
+        .gallery {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            margin-top: 20px;
+        }
+        .gallery img {
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+            margin: 10px;
+            border: 1px solid #ddd;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>GarisMaster: Pembelajaran Interaktif Jenis Garisan</h1>
+        
+        <h2>1. Pembelajaran: Jenis-jenis Garisan</h2>
+        <p>Terdapat beberapa jenis garisan dalam reka bentuk:</p>
+        <ul>
+            <li>Garisan Lurus</li>
+            <li>Garisan Melengkung</li>
+            <li>Garisan Zig-zag</li>
+            <li>Garisan Putus-putus</li>
+        </ul>
+
+        <h2>2. Aktiviti: Lukis Garisan</h2>
+        <p>Cuba lukis garisan pada kanvas di bawah:</p>
+        <canvas id="canvas" width="400" height="200"></canvas><br>
+        <button onclick="clearCanvas()">Kosongkan Kanvas</button>
+
+        <h2>3. Kuiz: Kenalpasti Jenis Garisan</h2>
+        <p>Apakah jenis garisan yang anda lukis?</p>
+        <button onclick="checkLine('Lurus')">Garisan Lurus</button>
+        <button onclick="checkLine('Melengkung')">Garisan Melengkung</button>
+        <button onclick="checkLine('Zig-zag')">Garisan Zig-zag</button>
+        <button onclick="checkLine('Putus-putus')">Garisan Putus-putus</button>
+        <div id="result"></div>
+
+        <h2>4. Galeri: Contoh Penggunaan Garisan dalam Reka Bentuk</h2>
+        <div class="gallery">
+            <img src="/api/placeholder/150/150" alt="Contoh Garisan Lurus">
+            <img src="/api/placeholder/150/150" alt="Contoh Garisan Melengkung">
+            <img src="/api/placeholder/150/150" alt="Contoh Garisan Zig-zag">
+            <img src="/api/placeholder/150/150" alt="Contoh Garisan Putus-putus">
+        </div>
+
+        <h2>5. Perbincangan</h2>
+        <p>Bincangkan dengan rakan-rakan anda:</p>
+        <ul>
+            <li>Bagaimana garisan berbeza memberi kesan kepada reka bentuk?</li>
+            <li>Di mana anda boleh melihat penggunaan garisan ini dalam kehidupan seharian?</li>
+        </ul>
+    </div>
+
+    <script>
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+        let isDrawing = false;
+        let lastX = 0;
+        let lastY = 0;
+
+        canvas.addEventListener('mousedown', startDrawing);
+        canvas.addEventListener('mousemove', draw);
+        canvas.addEventListener('mouseup', stopDrawing);
+        canvas.addEventListener('mouseout', stopDrawing);
+
+        function startDrawing(e) {
+            isDrawing = true;
+            [lastX, lastY] = [e.offsetX, e.offsetY];
+        }
+
+        function draw(e) {
+            if (!isDrawing) return;
+            ctx.beginPath();
+            ctx.moveTo(lastX, lastY);
+            ctx.lineTo(e.offsetX, e.offsetY);
+            ctx.stroke();
+            [lastX, lastY] = [e.offsetX, e.offsetY];
+        }
+
+        function stopDrawing() {
+            isDrawing = false;
+        }
+
+        function clearCanvas() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+        }
+
+        function checkLine(lineType) {
+            document.getElementById('result').innerText = `Anda telah memilih: Garisan ${lineType}. Bagus! Setiap jenis garisan mempunyai kegunaannya tersendiri dalam reka bentuk.`;
+        }
+    </script>
+</body>
+</html>
+"Tambah laman utama"
